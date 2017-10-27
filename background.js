@@ -1,13 +1,21 @@
+chrome.tabs.onActivated.addListener(async function(){
+	updateTabSize()
+})
+
 chrome.tabs.onUpdated.addListener(async function(tabId, changeInfo, tab){
 	if(changeInfo.status != 'complete'){
 		return
 	}
 	await executeFile('inject.js')
+	updateTabSize()
+})
+
+async function updateTabSize(){
 	var tabSize = await storageGet('tabSize')
 	if(tabSize != undefined){
 		await executeCode("changeTabSize(" + tabSize + ')')
 	}
-})
+}
 
 function storageGet(key){
 	return new Promise(ok => {

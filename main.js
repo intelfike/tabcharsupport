@@ -30,6 +30,7 @@ document.body.onload = () => {
 	var tas = document.getElementsByTagName('textarea')
 	for (let i = tas.length - 1; i >= 0; i--) {
 		let ta = tas[i]
+		ta.style.fontFamily = 'monospace'
 		ta.onkeydown = e => {
 			switch(e.code){
 			case 'Enter':
