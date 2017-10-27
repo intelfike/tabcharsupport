@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "TabKeySupport",
+  "description": "全てのHTMLのTextAreaが、タブ入力サポート！",
+  "version": "0.0",
+
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["main.js"]
+    }
+  ],
+  "background": {
+      "persistent": true,
+      "scripts": ["background.js" ]
+   },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs", "storage", 
+    "http://*/*", "https://*/*"
+  ]
+}
