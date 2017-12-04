@@ -1,1 +1,1 @@
-zip tabkeysupport.zip manifest.json popup.html popup.js background.js inject.js icon.png
+zip tabcharsupport.zip manifest.json popup.html popup.js background.js inject.js icon.png
