@@ -37,15 +37,15 @@ function tabKeySupportAll() {
 function tabKeySupport(ta) {
 	ta.style.fontFamily = 'monospace'
 	ta.onkeydown = e => {
+		if (e.ctrlKey || e.altKey || e.shiftKey) {
+			return true
+		}
 		switch(e.code){
 		case 'Enter':
 			var indent = ta.getCurrentIndent()
 			ta.insertText('\n'+indent)
 			return false
 		case 'Tab':
-			if (e.ctrlKey) {
-				return true
-			}
 			ta.insertText('\t')
 			return false
 		}

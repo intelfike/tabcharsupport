@@ -1,39 +1,11 @@
-// chrome.tabs.onActivated.addListener(async function(){
-// 	updateTabSize()
-// })
-
-// chrome.tabs.onUpdated.addListener(async function(tabId, changeInfo, tab){
-// 	if(changeInfo.status != 'complete'){
-// 		return
-// 	}
-// 	await executeFile('inject.js')
-// 	updateTabSize()
-// })
-function tabKeySupportAll() {
-	executeCode('tabKeySupportAll()')
-}
-async function updateTabSize(){
-	var tabSize = await storageGet('tabSize')
-	if(tabSize != undefined){
-		await executeCode("changeTabSize(" + tabSize + ')')
-	}
-}
-
-function storageGet(key){
+function storageGet(key, def){
 	return new Promise(ok => {
-		chrome.storage.local.get(key, function(value){
+		chrome.storage.sync.get(key, function(value){
+			if(value[key] == undefined){
+				value[key] = def
+			}
 			ok(value[key])
 		})
-	})
-}
-function executeFile(file){
-	return new Promise(ok => {
-		chrome.tabs.executeScript(null,
-			{file:file},
-			(result)=>{
-				ok(result)
-			}
-		)
 	})
 }
 function executeCode(code){
@@ -47,6 +19,16 @@ function executeCode(code){
 	})
 }
 
+function tabKeySupportAll() {
+	executeCode('tabKeySupportAll()')
+}
+async function updateTabSize(){
+	var tabSize = await storageGet('tabSize', 4)
+	if(tabSize != undefined){
+		await executeCode("changeTabSize(" + tabSize + ')')
+	}
+}
+
 chrome.runtime.onInstalled.addListener(()=>{
 	chrome.contextMenus.create({
 		title: 'このページのtextareaでtabキーを使う',
@@ -57,7 +39,6 @@ chrome.runtime.onInstalled.addListener(()=>{
 });
 
 chrome.contextMenus.onClicked.addListener(async function(itemData) {
-	// await executeFile('inject.js')
 	updateTabSize()
 	tabKeySupportAll()
 })
