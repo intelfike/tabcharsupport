@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "TabKeySupport",
-  "description": "全てのHTMLのTextAreaが、タブ入力サポート！",
+  "name": "TabCharSupport",
+  "description": "全てのテキストエリアが、タブ入力をサポート！",
   "version": "1.0",
   
   "icons": {

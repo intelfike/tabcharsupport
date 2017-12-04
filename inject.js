@@ -27,14 +27,14 @@ HTMLTextAreaElement.prototype.getCurrentIndent = function(){
 	return indent[0]
 }
 
-function tabKeySupportAll() {
+function tabCharSupportAll() {
 	var tas = document.getElementsByTagName('textarea')
 	for (let i = tas.length - 1; i >= 0; i--) {
 		let ta = tas[i]
-		tabKeySupport(ta)
+		tabCharSupport(ta)
 	}
 }
-function tabKeySupport(ta) {
+function tabCharSupport(ta) {
 	ta.style.fontFamily = 'monospace'
 	ta.onkeydown = e => {
 		if (e.ctrlKey || e.altKey || e.shiftKey) {

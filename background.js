@@ -19,8 +19,8 @@ function executeCode(code){
 	})
 }
 
-function tabKeySupportAll() {
-	executeCode('tabKeySupportAll()')
+function tabCharSupportAll() {
+	executeCode('tabCharSupportAll()')
 }
 async function updateTabSize(){
 	var tabSize = await storageGet('tabSize', 4)
@@ -31,8 +31,8 @@ async function updateTabSize(){
 
 chrome.runtime.onInstalled.addListener(()=>{
 	chrome.contextMenus.create({
-		title: 'このページのtextareaでtabキーを使う',
-		id: 'tabkeysupport',
+		title: 'このページのテキストエリアでtab文字を入力する',
+		id: 'tabCharsupport',
 		type: "normal",
 		contexts: ['editable'],
 	 })
@@ -40,5 +40,5 @@ chrome.runtime.onInstalled.addListener(()=>{
 
 chrome.contextMenus.onClicked.addListener(async function(itemData) {
 	updateTabSize()
-	tabKeySupportAll()
+	tabCharSupportAll()
 })
